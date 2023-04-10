@@ -1,0 +1,80 @@
+import Image from "next/image";
+import Tag from "app/components/Tag";
+import siteMetadata from "@/data/siteMetadata";
+import AnimateIn from "app/components/Animations/AnimateIn";
+import Link from "next/link";
+// import { useState } from "react";
+// import PaginationAll from "@/components/PaginationAll";
+
+// const postDateTemplate = { year: "numeric", month: "long", day: "numeric" };
+
+export default function ListLayoutLatestShows(props) {
+  const shows = props.shows;
+  console.log("shows-props", props);
+
+  return (
+    <>
+      {/* <div className="divide-y m-auto relative phone:w-full laptop:w-full"> */}
+      <div className="divide-y divide-gray-200 rounded-md bg-slate-900/70 p-4 backdrop-blur dark:divide-gray-700">
+        <ul>
+          {!shows.length && "No shows found."}
+          {shows.map((show) => {
+            const { title, message, tag, imageSrc, playCount, id } = show;
+            const showLink = `/shows/${show._id}`;
+            console.log("showID", show._id);
+            const defaultImage =
+              "/static/img/review-images/Steven Ruttler-album cover.jpeg";
+            return (
+              <AnimateIn>
+                <li key={show._id} className="">
+                  <article className="flex justify-center space-x-4 p-60 mt-28">
+                    <div className="p-8 mt-8">
+                      <div className="w-56 phone:float-none phone:w-full">
+                        <div className="flex flex-wrap float-right">
+                          <Tag key={show.audioSrc} text={tag} />
+                          <span className="inline-flex items-center justify-center rounded-full bg-gray-500 px-2 py-1 text-xs font-bold leading-none text-red-100">
+                            <h1>{playCount > 3 ? playCount : 3} plays</h1>
+                          </span>
+                        </div>
+                        <Link
+                          href={showLink}
+                          className="text-gray-900 dark:text-gray-100"
+                        >
+                          <Image
+                            src={imageSrc || defaultImage}
+                            alt="list-visual"
+                            style={{ objectFit: "contain" }}
+                            // fill={true}
+                            width={180}
+                            height={180}
+                            className="list-image"
+                          />
+                        </Link>
+                      </div>
+                      <div className="xl:col-span-3 space-y-3">
+                        <div>
+                          <Link href={showLink}>
+                            <h3 className="text-right text-2xl font-bold leading-8 tracking-tight text-gray-200">
+                              {title}
+                            </h3>
+                          </Link>
+                        </div>
+                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                          {message.length > 160
+                            ? message.substr(0, 160) + "...[Read More]"
+                            : message}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </li>
+              </AnimateIn>
+            );
+          })}
+        </ul>
+      </div>
+
+      {/* <PaginationAll currentPage={pagination.currentPage} totalPages={pagination.totalPages} /> */}
+    </>
+  );
+}
