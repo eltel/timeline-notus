@@ -81,7 +81,7 @@ const Magazine = async () => {
     <>
       <IndexNavbar fixed />
       <div className={styles.magazine}>
-        <main className="flex flex-col max-h-[975px] overflow-scroll phone:w-full phone:p-8 laptop:p-24 laptop:space-x-8">
+        <main className="flex flex-col max-h-[850px] overflow-hidden phone:w-full phone:p-8 laptop:w-3/4 laptop:m-auto laptop:p-24">
           <div className="mt-12">magazine</div>
           <LatestShows shows={shows} />
         </main>

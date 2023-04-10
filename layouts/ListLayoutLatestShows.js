@@ -15,7 +15,7 @@ export default function ListLayoutLatestShows(props) {
   return (
     <>
       {/* <div className="divide-y m-auto relative phone:w-full laptop:w-full"> */}
-      <div className="divide-y divide-gray-200 rounded-md bg-slate-900/70 p-4 backdrop-blur dark:divide-gray-700">
+      <div className="divide-y divide-gray-200 h-[750px] max-h-[750px] overflow-auto rounded-md bg-slate-900/70 p-4 backdrop-blur dark:divide-gray-700">
         <ul>
           {!shows.length && "No shows found."}
           {shows.map((show) => {
@@ -27,9 +27,9 @@ export default function ListLayoutLatestShows(props) {
             return (
               <AnimateIn>
                 <li key={show._id} className="">
-                  <article className="flex justify-center space-x-4 p-60 mt-28">
+                  <article className="flex justify-center min-w-full space-x-4 p-60 mt-28 laptop:w-full">
                     <div className="p-8 mt-8">
-                      <div className="w-56 phone:float-none phone:w-full">
+                      <div className="w-56 phone:float-none min-w-full phone:w-full laptop:w-full laptop:min-w-full">
                         <div className="flex flex-wrap float-right">
                           <Tag key={show.audioSrc} text={tag} />
                           <span className="inline-flex items-center justify-center rounded-full bg-gray-500 px-2 py-1 text-xs font-bold leading-none text-red-100">
@@ -40,26 +40,28 @@ export default function ListLayoutLatestShows(props) {
                           href={showLink}
                           className="text-gray-900 dark:text-gray-100"
                         >
-                          <Image
-                            src={imageSrc || defaultImage}
-                            alt="list-visual"
-                            style={{ objectFit: "contain" }}
-                            // fill={true}
-                            width={180}
-                            height={180}
-                            className="list-image"
-                          />
+                          <div className="min-w-[180px] min-h-[180px]">
+                            <Image
+                              src={imageSrc || defaultImage}
+                              alt="list-visual"
+                              // style={{ objectFit: "contain" }}
+                              // fill={true}
+                              width={180}
+                              height={180}
+                              className="list-image"
+                            />
+                          </div>
                         </Link>
                       </div>
                       <div className="xl:col-span-3 space-y-3">
                         <div>
                           <Link href={showLink}>
-                            <h3 className="text-right text-2xl font-bold leading-8 tracking-tight text-gray-200">
+                            <h3 className="text-right text-2xl font-bold leading-8 tracking-tight text-gray-500">
                               {title}
                             </h3>
                           </Link>
                         </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                        <div className="prose max-w-none text-teal-500 dark:text-gray-400">
                           {message.length > 160
                             ? message.substr(0, 160) + "...[Read More]"
                             : message}
