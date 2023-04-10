@@ -6,11 +6,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:tailwind": "tailwind build styles/index.css -o styles/tailwind.css"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "@popperjs/core": "^2.11.7",
+    "@tailwindcss/forms": "^0.5.3",
+    "chart.js": "^4.2.1",
+    "github-slugger": "^2.0.0",
+    "gulp": "^4.0.2",
+    "gulp-append-prepend": "^1.0.9",
+    "mongodb": "^5.1.0",
     "next": "13.2.4",
+    "next-share": "^0.20.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-scripts": "^5.0.1",
+    "tailwindcss": "^3.3.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21"
   }
 }
