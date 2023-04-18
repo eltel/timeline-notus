@@ -27,7 +27,6 @@ export async function playCountIncrement(client, collection, document) {
 }
 
 export async function getAllDocuments(client, collection, sort, filter = {}) {
-  console.log("getAllDocs");
   const db = client.db();
   const documents = await db
     .collection(collection)

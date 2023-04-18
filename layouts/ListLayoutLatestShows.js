@@ -1,8 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import Tag from "app/components/Tag";
 import siteMetadata from "@/data/siteMetadata";
 import AnimateIn from "app/components/Animations/AnimateIn";
-import Link from "next/link";
+import CustomScrollDiv from "app/components/Scrollbars/CustomScrollDiv";
+
 // import { useState } from "react";
 // import PaginationAll from "@/components/PaginationAll";
 
@@ -15,13 +17,13 @@ export default function ListLayoutLatestShows(props) {
   return (
     <>
       {/* <div className="divide-y m-auto relative phone:w-full laptop:w-full"> */}
-      <div className="divide-y divide-gray-200 h-[750px] max-h-[750px] overflow-auto rounded-md bg-slate-900/70 p-4 backdrop-blur dark:divide-gray-700">
-        <ul>
+      <div className="divide-y mt-24 divide-gray-200 h-[800px] max-h-[800px] overflow-auto rounded-md bg-slate-900/70 p-4 backdrop-blur dark:divide-gray-700 overflow-y-scroll scrollhost scrollhost::-webkit-scrollbar">
+        {/* <CustomScrollDiv> */}
+        <ul className="h-[800px] max-h-[800px]">
           {!shows.length && "No shows found."}
           {shows.map((show) => {
             const { title, message, tag, imageSrc, playCount, id } = show;
             const showLink = `/shows/${show._id}`;
-            console.log("showID", show._id);
             const defaultImage =
               "/static/img/review-images/Steven Ruttler-album cover.jpeg";
             return (
@@ -40,7 +42,7 @@ export default function ListLayoutLatestShows(props) {
                           href={showLink}
                           className="text-gray-900 dark:text-gray-100"
                         >
-                          <div className="min-w-[180px] min-h-[180px]">
+                          <div className="min-w-[180px] min-h-[180px] w-[180px] max-w-[180px]">
                             <Image
                               src={imageSrc || defaultImage}
                               alt="list-visual"
@@ -56,7 +58,7 @@ export default function ListLayoutLatestShows(props) {
                       <div className="xl:col-span-3 space-y-3">
                         <div>
                           <Link href={showLink}>
-                            <h3 className="text-right text-2xl font-bold leading-8 tracking-tight text-gray-500">
+                            <h3 className="text-right text-2xl tracking-tight text-yellow-500 hover:text-blue-600 uppercase mt-2">
                               {title}
                             </h3>
                           </Link>
@@ -74,6 +76,7 @@ export default function ListLayoutLatestShows(props) {
             );
           })}
         </ul>
+        {/* </CustomScrollDiv> */}
       </div>
 
       {/* <PaginationAll currentPage={pagination.currentPage} totalPages={pagination.totalPages} /> */}

@@ -28,7 +28,9 @@ module.exports = {
     extend: {
       backgroundImage: {
         page: "url('/img/hero2.webp')",
+        show: "url('/img/hero3.webp')",
       },
+      extend: {},
     },
   },
   plugins: [],

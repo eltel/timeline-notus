@@ -1,5 +1,7 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
-import "./onHoverStyle.css";
+"use client";
+
+import { useState, useCallback, useEffect, useRef } from "react";
+// import "./onHoverStyle.css";
 
 const SCROLL_BOX_MIN_HEIGHT = 20;
 
