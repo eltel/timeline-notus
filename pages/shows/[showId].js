@@ -80,8 +80,8 @@ function ShowDetailPage(props) {
             ))}
           </ol>
         </div>
-        {/* </div> */}
       </div>
+      {/* </div> */}
     </Fragment>
   );
 }
