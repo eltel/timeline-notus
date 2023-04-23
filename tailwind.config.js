@@ -30,6 +30,10 @@ module.exports = {
         page: "url('/img/hero2.webp')",
         show: "url('/img/hero3.webp')",
       },
+      fontFamily: {
+        sans: ["Exo", "sans-serif"],
+        serif: ['"Quicksand"', "serif"],
+      },
       extend: {},
     },
   },

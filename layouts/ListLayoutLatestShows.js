@@ -29,7 +29,7 @@ export default function ListLayoutLatestShows(props) {
             return (
               <AnimateIn>
                 <li key={show._id} className="">
-                  <article className="flex justify-center min-w-full space-x-4 p-60 mt-28 laptop:w-full">
+                  <article className="flex justify-center font-sans min-w-full space-x-4 p-60 mt-28 laptop:w-full">
                     <div className="p-8 mt-8">
                       <div className="w-56 phone:float-none min-w-full phone:w-full laptop:w-full laptop:min-w-full">
                         <div className="flex flex-wrap float-right">
@@ -58,12 +58,12 @@ export default function ListLayoutLatestShows(props) {
                       <div className="xl:col-span-3 space-y-3">
                         <div>
                           <Link href={showLink}>
-                            <h3 className="text-right text-2xl tracking-tight text-yellow-500 hover:text-blue-600 uppercase mt-2">
+                            <h3 className="text-right font-sans text-2xl tracking-tight text-yellow-500 uppercase mt-2">
                               {title}
                             </h3>
                           </Link>
                         </div>
-                        <div className="prose max-w-none text-teal-500 dark:text-gray-400">
+                        <div className="prose max-w-none text-teal-500 font-extralight">
                           {message.length > 160
                             ? message.substr(0, 160) + "...[Read More]"
                             : message}

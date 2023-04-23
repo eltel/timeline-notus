@@ -2146,8 +2146,9 @@ Improve consistency of default fonts in all browsers. (https://github.com/sindre
 
 body {
   font-family: system-ui, -apple-system,
-    /* Firefox supports this but not yet `system-ui` */ "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    /* Firefox supports this but not yet `system-ui` */ Exo, sans-serif,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
 }
 
 /*
@@ -6367,7 +6368,7 @@ select {
 }
 
 .rhap_controls-section {
-  width: 400px !important;
+  width: 700px !important;
 }
 
 .rhap_main-controls {
@@ -6379,6 +6380,18 @@ select {
   font-size: 80px !important;
   width: 80px !important;
   height: 80px !important;
+}
+
+.rhap_time {
+  color: #f7ab21 !important;
+}
+
+.rhap_progress-indicator {
+  width: 15px !important;
+  height: 15px !important;
+  margin-left: -2px !important;
+  top: -5px !important;
+  background: #868686;
 }
 
 /* Custom CSS ends here */

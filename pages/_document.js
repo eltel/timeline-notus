@@ -14,6 +14,10 @@ class MyDocument extends Document {
             sizes="76x76"
             href="/img/brand/apple-icon.png"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Exo:wght@100;200;300;400;600&family=Open+Sans:ital,wght@0,300;0,400;0,500;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
         </Head>
         <body className="text-blueGray-700 antialiased max-h-screen">
           <div id="page-transition" className="relative"></div>
