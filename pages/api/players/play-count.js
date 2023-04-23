@@ -60,7 +60,7 @@ async function handler(req, res) {
     let result;
     const showIdJson = JSON.parse(showId);
     let ObjectId = require("mongodb").ObjectId;
-    console.log("ObjectId", ObjectId(showIdJson));
+    // console.log("ObjectId", ObjectId(showIdJson));
     const db = client.db("timeline");
 
     try {
@@ -82,7 +82,9 @@ async function handler(req, res) {
       // res.status(201).json({ message: "Updated Play Count" });
       // client.close();
     } catch (error) {
-      res.status(500).json({ message: "inserting data to the database failed" });
+      res
+        .status(500)
+        .json({ message: "inserting data to the database failed" });
       return;
     }
 
@@ -107,7 +109,9 @@ async function handler(req, res) {
     // const tag = req.query;
     try {
       console.log("getTRY");
-      let document = await getDocument(client, "shows", { showId: ObjectId(showId) }); // maybe add this to filter at the end: , { showId: showId }
+      let document = await getDocument(client, "shows", {
+        showId: ObjectId(showId),
+      }); // maybe add this to filter at the end: , { showId: showId }
       // documents = await documents.filter((document) => document.tag !== tag);
       res.status(200).json({ show: document });
       // console.log("api-documents", documents);
