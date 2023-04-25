@@ -258,6 +258,11 @@
     );
     z-index: 1;
   }
+
+  .main {
+    width: 100% !important;
+    padding: 0 1rem;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

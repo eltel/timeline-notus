@@ -1,131 +1,162 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
-import "./onHoverStyle.css";
+import React from "react";
 
-const SCROLL_BOX_MIN_HEIGHT = 20;
-
-export default function CustomScrollDiv({ children, className, ...restProps }) {
-  const [hovering, setHovering] = useState(false);
-  const [scrollBoxHeight, setScrollBoxHeight] = useState(SCROLL_BOX_MIN_HEIGHT);
-  const [scrollBoxTop, setScrollBoxTop] = useState(0);
-  const [lastScrollThumbPosition, setScrollThumbPosition] = useState(0);
-  const [isDragging, setDragging] = useState(false);
-
-  const handleMouseOver = useCallback(() => {
-    !hovering && setHovering(true);
-  }, [hovering]);
-
-  const handleMouseOut = useCallback(() => {
-    !!hovering && setHovering(false);
-  }, [hovering]);
-
-  const handleDocumentMouseUp = useCallback(
-    (e) => {
-      if (isDragging) {
-        e.preventDefault();
-        setDragging(false);
-      }
-    },
-    [isDragging]
-  );
-
-  const handleDocumentMouseMove = useCallback(
-    (e) => {
-      if (isDragging) {
-        e.preventDefault();
-        e.stopPropagation();
-        const scrollHostElement = scrollHostRef.current;
-        const { scrollHeight, offsetHeight } = scrollHostElement;
-
-        let deltaY = e.clientY - lastScrollThumbPosition;
-        let percentage = deltaY * (scrollHeight / offsetHeight);
-
-        setScrollThumbPosition(e.clientY);
-        setScrollBoxTop(
-          Math.min(
-            Math.max(0, scrollBoxTop + deltaY),
-            offsetHeight - scrollBoxHeight
-          )
-        );
-        scrollHostElement.scrollTop = Math.min(
-          scrollHostElement.scrollTop + percentage,
-          scrollHeight - offsetHeight
-        );
-      }
-    },
-    [isDragging, lastScrollThumbPosition, scrollBoxHeight, scrollBoxTop]
-  );
-
-  const handleScrollThumbMouseDown = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setScrollThumbPosition(e.clientY);
-    setDragging(true);
-    console.log("handleScrollThumbMouseDown");
-  }, []);
-
-  const handleScroll = useCallback(() => {
-    if (!scrollHostRef) {
-      return;
-    }
-    const scrollHostElement = scrollHostRef.current;
-    const { scrollTop, scrollHeight, offsetHeight } = scrollHostElement;
-
-    let newTop =
-      (parseInt(scrollTop, 10) / parseInt(scrollHeight, 10)) * offsetHeight;
-    // newTop = newTop + parseInt(scrollTop, 10);
-    newTop = Math.min(newTop, offsetHeight - scrollBoxHeight);
-    setScrollBoxTop(newTop);
-  }, []);
-
-  const scrollHostRef = useRef();
-
-  useEffect(() => {
-    const scrollHostElement = scrollHostRef.current;
-    const { clientHeight, scrollHeight } = scrollHostElement;
-    const scrollThumbPercentage = clientHeight / scrollHeight;
-    const scrollThumbHeight = Math.max(
-      scrollThumbPercentage * clientHeight,
-      SCROLL_BOX_MIN_HEIGHT
-    );
-    setScrollBoxHeight(scrollThumbHeight);
-    scrollHostElement.addEventListener("scroll", handleScroll, true);
-    return function cleanup() {
-      scrollHostElement.removeEventListener("scroll", handleScroll, true);
-    };
-  }, []);
-
-  useEffect(() => {
-    //this is handle the dragging on scroll-thumb
-    document.addEventListener("mousemove", handleDocumentMouseMove);
-    document.addEventListener("mouseup", handleDocumentMouseUp);
-    document.addEventListener("mouseleave", handleDocumentMouseUp);
-    return function cleanup() {
-      document.removeEventListener("mousemove", handleDocumentMouseMove);
-      document.removeEventListener("mouseup", handleDocumentMouseUp);
-      document.removeEventListener("mouseleave", handleDocumentMouseUp);
-    };
-  }, [handleDocumentMouseMove, handleDocumentMouseUp]);
-
+export default function Footer() {
   return (
-    <div
-      className={"scrollhost-container"}
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
-    >
-      <div
-        ref={scrollHostRef}
-        className={`scrollhost ${className}`}
-        {...restProps}
-      >
-        {children}
-      </div>
-      <div className={"scroll-bar"} style={{ opacity: hovering ? 1 : 0 }}>
+    <>
+      <footer className="relative bg-blueGray-200 pt-8 pb-6">
         <div
-          className={"scroll-thumb"}
-          style={{ height: scrollBoxHeight, top: scrollBoxTop }}
-          onMouseDown={handleScrollThumbMouseDown}
-        />
-      </div>
-    </div>
+          className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
+          style={{ transform: "translateZ(0)" }}
+        >
+          <svg
+            className="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+            <polygon
+              className="text-blueGray-200 fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
+        </div>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap text-center lg:text-left">
+            <div className="w-full lg:w-6/12 px-4">
+              <h4 className="text-3xl font-semibold">Let's keep in touch!</h4>
+              <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
+                Find us on any of these platforms, we respond 1-2 business days.
+              </h5>
+              <div className="mt-6 lg:mb-0 mb-6">
+                <button
+                  className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                >
+                  <i className="fab fa-twitter"></i>
+                </button>
+                <button
+                  className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                >
+                  <i className="fab fa-facebook-square"></i>
+                </button>
+                <button
+                  className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                >
+                  <i className="fab fa-dribbble"></i>
+                </button>
+                <button
+                  className="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
+                  type="button"
+                >
+                  <i className="fab fa-github"></i>
+                </button>
+              </div>
+            </div>
+            <div className="w-full lg:w-6/12 px-4">
+              <div className="flex flex-wrap items-top mb-6">
+                <div className="w-full lg:w-4/12 px-4 ml-auto">
+                  <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
+                    Useful Links
+                  </span>
+                  <ul className="list-unstyled">
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://www.creative-tim.com/presentation?ref=nnjs-footer"
+                      >
+                        About Us
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://blog.creative-tim.com?ref=nnjs-footer"
+                      >
+                        Blog
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://www.github.com/creativetimofficial?ref=nnjs-footer"
+                      >
+                        Github
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://www.creative-tim.com/bootstrap-themes/free?ref=nnjs-footer"
+                      >
+                        Free Products
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="w-full lg:w-4/12 px-4">
+                  <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
+                    Other Resources
+                  </span>
+                  <ul className="list-unstyled">
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://github.com/creativetimofficial/notus-nextjs/blob/main/LICENSE.md?ref=nnjs-footer"
+                      >
+                        MIT License
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://creative-tim.com/terms?ref=nnjs-footer"
+                      >
+                        Terms & Conditions
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://creative-tim.com/privacy?ref=nnjs-footer"
+                      >
+                        Privacy Policy
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="https://creative-tim.com/contact-us?ref=nnjs-footer"
+                      >
+                        Contact Us
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr className="my-6 border-blueGray-300" />
+          <div className="flex flex-wrap items-center md:justify-between justify-center">
+            <div className="w-full md:w-4/12 px-4 mx-auto text-center">
+              <div className="text-sm text-blueGray-500 font-semibold py-1">
+                Copyright © {new Date().getFullYear()} Notus NextJS by{" "}
+                <a
+                  href="https://www.creative-tim.com?ref=nnjs-footer"
+                  className="text-blueGray-500 hover:text-blueGray-800"
+                >
+                  Creative Tim
+                </a>
+                .
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
